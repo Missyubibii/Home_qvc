@@ -37,18 +37,25 @@ class RegisteredUserController extends Controller
             'address' => ['nullable', 'string'],
         ]);
 
+        // Gán role mặc định là user
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
             'address' => $request->address,
+            'role' => 'user',
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // Chuyển hướng theo role
+        if ($user->role === 'user') {
+            return redirect()->route('home');
+        } else {
+            return redirect()->route('admin.dashboard');
+        }
     }
 }

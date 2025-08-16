@@ -14,13 +14,15 @@
             <!-- Nút mở menu mobile và Logo -->
             <div class="flex items-center gap-4">
                 <button id="open-menu-btn" class="lg:hidden text-gray-600 hover:text-primary-500">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                    <svg class="w-6 h-6" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                        <path fill="currentColor"
+                            d="M16 132h416c8.8 0 16-7.2 16-16V84c0-8.8-7.2-16-16-16H16C7.2 68 0 75.2 0 84v32c0 8.8 7.2 16 16 16zm416 56H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h416c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0 128H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h416c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16z">
+                        </path>
                     </svg>
                 </button>
                 <a href="{{ route('home') }}" class="hidden lg:block flex-shrink-0">
-                    <img class="h-10 md:h-14 w-auto"
-                        src="{{ asset('img/logo.png') }}"
+                    <img class="h-10 md:h-14 w-auto" src="{{ asset('img/logo.png') }}"
                         alt="{{ __('Logo QuocViet Computer') }}"
                         onerror="this.onerror=null;this.src='{{ asset('img/logo-placeholder.png') }}';">
                 </a>
@@ -29,75 +31,105 @@
             <!-- Thanh tìm kiếm (Desktop) -->
             <div class="hidden lg:flex relative flex-grow mx-4">
                 <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                    <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
+                    <svg class="w-5 h-5 text-gray-400" aria-hidden="true" focusable="false" data-prefix="fas"
+                        data-icon="search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path fill="currentColor"
+                            d="M505 442.7L405.3 343c28.3-34.9 45.2-79 45.2-127C450.5 96.5 354 0 225.2 0S0 96.5 0 216.1s96.5 216.1 216.1 216.1c48 0 92.1-16.9 127-45.2l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6 0-33.9zM216.1 368.2c-84 0-152.1-68.1-152.1-152.1S132.1 64 216.1 64s152.1 68.1 152.1 152.1-68.1 152.1-152.1 152.1z">
+                        </path>
+                    </svg>
                 </span>
-                <input type="text" placeholder="{{ __('Bạn muốn mua gì hôm nay?') }}" class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow text-sm">
+                <input type="text" placeholder="{{ __('Bạn muốn mua gì hôm nay?') }}"
+                    class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow text-sm">
             </div>
 
             <!-- Các nút chức năng -->
             <div class="flex items-center gap-3">
-                <a href="#" class="flex items-center justify-center gap-2 w-10 h-10 lg:w-auto lg:h-auto lg:px-4 lg:py-2.5 rounded-full lg:rounded-lg bg-primary-600 text-white hover:bg-primary-700 transition-colors duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
-                        </svg>
-                    <span class="hidden lg:inline font-medium text-sm whitespace-nowrap">{{ __('Tư vấn Game - Net') }}</span>
-                </a>
-                <a href="#" class="flex items-center justify-center gap-2 w-10 h-10 lg:w-auto lg:h-auto lg:px-4 lg:py-2.5 rounded-full lg:rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.325.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 0 1 1.37.49l1.296 2.247a1.125 1.125 0 0 1-.26 1.431l-1.003.827c-.293.241-.438.613-.43.992a7.723 7.723 0 0 1 0 .255c-.008.378.137.75.43.991l1.004.827c.424.35.534.955.26 1.43l-1.298 2.247a1.125 1.125 0 0 1-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.47 6.47 0 0 1-.22.128c-.331.183-.581.495-.644.869l-.213 1.281c-.09.543-.56.94-1.11.94h-2.594c-.55 0-1.019-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 0 1-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 0 1-1.369-.49l-1.297-2.247a1.125 1.125 0 0 1 .26-1.431l1.004-.827c.292-.24.437-.613.43-.991a6.932 6.932 0 0 1 0-.255c.007-.38-.138-.751-.43-.992l-1.004-.827a1.125 1.125 0 0 1-.26-1.43l1.297-2.247a1.125 1.125 0 0 1 1.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.086.22-.128.332-.183.582-.495.644-.869l.214-1.28Z" />
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                <a href="#"
+                    class="flex items-center justify-center gap-2 w-10 h-10 lg:w-auto lg:h-auto lg:px-4 lg:py-2.5 rounded-full lg:rounded-lg bg-primary-600 text-white hover:bg-primary-700 transition-colors duration-300">
+                    <svg class="w-5 h-5" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="headset"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                        <path fill="currentColor"
+                            d="M256 48C141.1 48 48 141.1 48 256v80c0 26.5 21.5 48 48 48h16c8.8 0 16-7.2 16-16v-96c0-8.8-7.2-16-16-16H96v-16c0-88.2 71.8-160 160-160s160 71.8 160 160v16h-32c-8.8 0-16 7.2-16 16v96c0 8.8 7.2 16 16 16h16c26.5 0 48-21.5 48-48v-80c0-114.9-93.1-208-208-208z">
+                        </path>
                     </svg>
-                    <span class="hidden lg:inline font-medium text-sm text-gray-800 hover:bg-gray-100 hover:text-primary-500 whitespace-nowrap">{{ __('Build PC') }}</span>
+                    <span
+                        class="hidden lg:inline font-medium text-sm whitespace-nowrap">{{ __('Tư vấn Game - Net') }}</span>
                 </a>
+                <a href="#"
+                    class="flex items-center justify-center gap-2 w-10 h-10 lg:w-auto lg:h-auto lg:px-4 lg:py-2.5 rounded-full lg:rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors duration-300">
+                    <svg class="w-5 h-5" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="desktop"
+                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                        <path fill="currentColor"
+                            d="M528 0H48C21.5 0 0 21.5 0 48v320c0 26.5 21.5 48 48 48h192v32h-64c-8.8 0-16 7.2-16 16v16c0 8.8 7.2 16 16 16h256c8.8 0 16-7.2 16-16v-16c0-8.8-7.2-16-16-16h-64v-32h192c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zm0 368H48V48h480v320z">
+                        </path>
+                    </svg>
+                    <span
+                        class="hidden lg:inline font-medium text-sm text-gray-800 hover:bg-gray-100 hover:text-primary-500 whitespace-nowrap">{{ __('Build PC') }}</span>
+                </a>
+                <a href="#"
+                    class="flex items-center justify-center gap-2 w-10 h-10 lg:w-auto lg:h-auto lg:px-4 lg:py-2.5 rounded-full lg:rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors duration-300">
+                    <svg class="w-5 h-5" aria-hidden="true" focusable="false" data-prefix="fas"
+                        data-icon="shopping-cart" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                        <path fill="currentColor"
+                            d="M528.12 301.319l47.273-208A16 16 0 0 0 560 80H128l-9.4-47.319A16 16 0 0 0 103.319 32H16A16 16 0 0 0 0 48v16a16 16 0 0 0 16 16h70.319l70.4 353.319A16 16 0 0 0 172.319 448h295.362a16 16 0 0 0 15.6-12.681l47.273-208zM172.319 400l-44.8-224h352.96l-44.8 224H172.319z">
+                        </path>
+                    </svg>
+                    <span
+                        class="hidden lg:inline font-medium text-sm text-gray-800 hover:bg-gray-100 hover:text-primary-500 whitespace-nowrap">{{ __('Giỏ hàng') }}</span>
+                </a>
+                <span id="cart-count"
+                    class="absolute -top-1 -right-1 items-center justify-center w-5 h-5 bg-primary-600 text-white text-xs font-bold rounded-full hidden">0</span>
                 <div class="relative">
-                    @auth
-                    <a href="#" class="flex items-center justify-center gap-2 w-10 h-10 lg:w-auto lg:h-auto lg:px-4 lg:py-2.5 rounded-full lg:rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors duration-300">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                        </svg>
-                        <span class="hidden lg:inline font-medium text-sm text-gray-800 hover:bg-gray-100 hover:text-primary-500">{{ __('Giỏ hàng') }}</span>
-                    </a>
-                    <span id="cart-count" class="absolute -top-1 -right-1 items-center justify-center w-5 h-5 bg-primary-600 text-white text-xs font-bold rounded-full hidden">0</span>
-                    @endauth
                 </div>
                 @guest
-                <a href="{{ route('login') }}" class="flex items-center justify-center gap-2 w-10 h-10 lg:w-auto lg:h-auto lg:px-4 lg:py-2.5 rounded-full lg:rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                    </svg>
-                    <span class="hidden lg:inline font-medium text-sm text-gray-800 hover:bg-gray-100 hover:text-primary-500">{{ __('Đăng nhập') }}</span>
-                </a>
+                    <a href="{{ route('login') }}"
+                        class="flex items-center justify-center gap-2 w-10 h-10 lg:w-auto lg:h-auto lg:px-4 lg:py-2.5 rounded-full lg:rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors duration-300">
+                        <svg class="w-5 h-5" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="sign-in-alt"
+                            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                            <path fill="currentColor"
+                                d="M497 273l-96-96c-15-15-41-4.5-41 17v65H176c-13.3 0-24 10.7-24 24v48c0 13.3 10.7 24 24 24h184v65c0 21.5 26 32 41 17l96-96c9.4-9.4 9.4-24.6 0-34zM176 80h16c8.8 0 16 7.2 16 16v48c0 8.8-7.2 16-16 16h-16c-8.8 0-16-7.2-16-16V96c0-8.8 7.2-16 16-16zm0 352h16c8.8 0 16 7.2 16 16v48c0 8.8-7.2 16-16 16h-16c-8.8 0-16-7.2-16-16v-48c0-8.8 7.2-16 16-16z">
+                            </path>
+                        </svg>
+                        <span
+                            class="hidden lg:inline font-medium text-sm text-gray-800 hover:bg-gray-100 hover:text-primary-500">{{ __('Đăng nhập') }}</span>
+                    </a>
                 @endguest
 
                 @auth
-                <!-- Settings Dropdown -->
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="flex items-center justify-center gap-2 w-10 h-10 lg:w-auto lg:h-auto lg:px-4 lg:py-2.5 rounded-full lg:rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors duration-300">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
-                            </svg>
-                            <div class="hidden lg:inline font-medium text-sm text-gray-800 hover:bg-gray-100 hover:text-primary-500">{{ Auth::user()->name }}</div>
-                        </button>
-                    </x-slot>
+                    <!-- Settings Dropdown -->
+                    <x-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <button
+                                class="flex items-center justify-center gap-2 w-10 h-10 lg:w-auto lg:h-auto lg:px-4 lg:py-2.5 rounded-full lg:rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-100 hover:text-primary-500 transition-colors duration-300">
+                                <svg class="w-5 h-5" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="user"
+                                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path fill="currentColor"
+                                        d="M224 256A128 128 0 1 0 224 0a128 128 0 0 0 0 256zm89.6 32h-17.8c-22.2 10.2-46.7 16-71.8 16s-49.6-5.8-71.8-16h-17.8C100.3 288 64 324.3 64 368v48c0 26.5 21.5 48 48 48h224c26.5 0 48-21.5 48-48v-48c0-43.7-36.3-80-80-80z">
+                                    </path>
+                                </svg>
+                                <div
+                                    class="hidden lg:inline font-medium text-sm text-gray-800 hover:bg-gray-100 hover:text-primary-500">
+                                    {{ Auth::user()->name }}</div>
+                            </button>
+                        </x-slot>
 
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Hồ sơ') }}
-                        </x-dropdown-link>
+                        <x-slot name="content">
+                            <x-dropdown-link :href="route('profile.edit')">
+                                {{ __('Hồ sơ') }}
+                            </x-dropdown-link>
 
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
+                            <!-- Authentication -->
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
 
-                            <x-dropdown-link :href="route('logout')"
+                                <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
-                                {{ __('Đăng xuất') }}
-                            </x-dropdown-link>
-                        </form>
-                    </x-slot>
-                </x-dropdown>
+                                    {{ __('Đăng xuất') }}
+                                </x-dropdown-link>
+                            </form>
+                        </x-slot>
+                    </x-dropdown>
                 @endauth
             </div>
         </div>
@@ -107,9 +139,15 @@
     <div class="lg:hidden px-4 pb-3">
         <div class="relative">
             <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                <svg class="h-5 w-5 text-gray-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd" /></svg>
+                <svg class="w-5 h-5 text-gray-400" aria-hidden="true" focusable="false" data-prefix="fas"
+                    data-icon="search" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path fill="currentColor"
+                        d="M505 442.7L405.3 343c28.3-34.9 45.2-79 45.2-127C450.5 96.5 354 0 225.2 0S0 96.5 0 216.1s96.5 216.1 216.1 216.1c48 0 92.1-16.9 127-45.2l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6 0-33.9zM216.1 368.2c-84 0-152.1-68.1-152.1-152.1S132.1 64 216.1 64s152.1 68.1 152.1 152.1-68.1 152.1-152.1 152.1z">
+                    </path>
+                </svg>
             </span>
-            <input type="text" placeholder="{{ __('Bạn muốn mua gì hôm nay?') }}" class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow text-sm">
+            <input type="text" placeholder="{{ __('Bạn muốn mua gì hôm nay?') }}"
+                class="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-shadow text-sm">
         </div>
     </div>
 </header>

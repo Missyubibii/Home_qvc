@@ -1,30 +1,144 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="csrf-token" content="{{ csrf_token() }}">
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập & Đăng Ký</title>
+    <!-- Tải Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tải font Inter từ Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Tải icon -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Sử dụng font Inter làm font chữ mặc định */
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+        .form-container {
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+        /* Giúp icon trong input không bị ảnh hưởng bởi sự kiện của input */
+        .input-icon {
+            pointer-events: none;
+        }
+        /* Cho phép click vào icon xem mật khẩu */
+        .password-toggle {
+            pointer-events: auto;
+            cursor: pointer;
+        }
+        /* Thêm hiệu ứng chuyển động cho chiều cao của khung chính */
+        #main-container {
+            transition: height 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+    <div id="main-container" class="relative w-full max-w-md bg-white rounded-2xl shadow-lg overflow-hidden">
+        {{ $slot }}
+    </div>
 
-        <!-- Fonts -->
-        <link rel="preconnect" href="https://fonts.bunny.net">
-        <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Khởi tạo icon
+            lucide.createIcons();
+            
+            const mainContainer = document.getElementById('main-container');
+            const forms = {
+                'login-form': document.getElementById('login-form'),
+                'register-form': document.getElementById('register-form'),
+                'forgot-form': document.getElementById('forgot-form')
+            };
 
-        <!-- Scripts -->
-        @vite(['resources/css/app.css', 'resources/js/app.js'])
-    </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
-            </div>
+            // --- CÁC HÀM XỬ LÝ CHÍNH ---
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
-        </div>
-    </body>
+            // Hàm hiển thị form và điều chỉnh chiều cao
+            const showForm = (formIdToShow) => {
+                const targetForm = forms[formIdToShow];
+                if (!targetForm) return;
+
+                mainContainer.style.height = `${targetForm.scrollHeight}px`;
+
+                Object.values(forms).forEach(form => {
+                    const isTarget = form.id === formIdToShow;
+                    form.style.transform = isTarget ? 'translateX(0)' : 'translateX(100%)';
+                    form.style.opacity = isTarget ? '1' : '0';
+                    form.style.zIndex = isTarget ? '10' : '1';
+                });
+            };
+
+            // Hàm điều chỉnh chiều cao khi thay đổi kích thước cửa sổ
+            const adjustContainerHeight = () => {
+                const visibleForm = Object.values(forms).find(form => form.style.zIndex === '10') || forms['login-form'];
+                if (visibleForm) {
+                    mainContainer.style.height = `${visibleForm.scrollHeight}px`;
+                }
+            };
+
+            // Hàm chuyển đổi hiển thị mật khẩu
+            const togglePasswordVisibility = (event) => {
+                const toggleButton = event.currentTarget;
+                const passwordInput = toggleButton.previousElementSibling;
+                const icon = toggleButton.querySelector('i');
+
+                if (passwordInput && passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    icon.setAttribute('data-lucide', 'eye-off');
+                } else if (passwordInput) {
+                    passwordInput.type = 'password';
+                    icon.setAttribute('data-lucide', 'eye');
+                }
+                lucide.createIcons();
+            };
+
+            // --- GẮN CÁC SỰ KIỆN ---
+
+            // Gắn sự kiện click cho tất cả các nút chuyển form
+            document.querySelectorAll('[data-form-target]').forEach(button => {
+                button.addEventListener('click', () => {
+                    showForm(button.dataset.formTarget);
+                });
+            });
+
+            // Gắn sự kiện click cho tất cả các nút xem/ẩn mật khẩu
+            document.querySelectorAll('.password-toggle').forEach(toggle => {
+                toggle.addEventListener('click', togglePasswordVisibility);
+            });
+            
+            // Gắn sự kiện submit cho form đăng ký để kiểm tra mật khẩu
+            const registrationForm = document.getElementById('registration-form-element');
+            if (registrationForm) {
+                registrationForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    const passwordInput = document.getElementById('register-password');
+                    const confirmPasswordInput = document.getElementById('confirm-password');
+                    const passwordError = document.getElementById('password-error');
+
+                    passwordError.textContent = '';
+                    confirmPasswordInput.classList.remove('border-red-500');
+
+                    if (passwordInput.value !== confirmPasswordInput.value) {
+                        passwordError.textContent = 'Mật khẩu không khớp. Vui lòng thử lại.';
+                        confirmPasswordInput.classList.add('border-red-500');
+                        confirmPasswordInput.focus();
+                    } else {
+                        console.log('Đăng ký thành công! (Mật khẩu đã khớp)');
+                        alert('Đăng ký thành công!'); 
+                        showForm('login-form');
+                    }
+                });
+            }
+
+            // Lắng nghe sự kiện thay đổi kích thước cửa sổ
+            window.addEventListener('resize', adjustContainerHeight);
+
+            // --- KHỞI TẠO BAN ĐẦU ---
+            showForm('login-form');
+        });
+    </script>
+
+</body>
 </html>
