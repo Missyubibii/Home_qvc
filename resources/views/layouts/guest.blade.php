@@ -58,21 +58,24 @@
             // Hàm hiển thị form và điều chỉnh chiều cao
             const showForm = (formIdToShow) => {
                 const targetForm = forms[formIdToShow];
+                // Chỉ thực hiện nếu form tồn tại
                 if (!targetForm) return;
 
                 mainContainer.style.height = `${targetForm.scrollHeight}px`;
 
                 Object.values(forms).forEach(form => {
-                    const isTarget = form.id === formIdToShow;
-                    form.style.transform = isTarget ? 'translateX(0)' : 'translateX(100%)';
-                    form.style.opacity = isTarget ? '1' : '0';
-                    form.style.zIndex = isTarget ? '10' : '1';
+                    if(form) { // Kiểm tra xem form có tồn tại không
+                        const isTarget = form.id === formIdToShow;
+                        form.style.transform = isTarget ? 'translateX(0)' : 'translateX(100%)';
+                        form.style.opacity = isTarget ? '1' : '0';
+                        form.style.zIndex = isTarget ? '10' : '1';
+                    }
                 });
             };
 
             // Hàm điều chỉnh chiều cao khi thay đổi kích thước cửa sổ
             const adjustContainerHeight = () => {
-                const visibleForm = Object.values(forms).find(form => form.style.zIndex === '10') || forms['login-form'];
+                const visibleForm = Object.values(forms).find(form => form && form.style.zIndex === '10') || forms['login-form'];
                 if (visibleForm) {
                     mainContainer.style.height = `${visibleForm.scrollHeight}px`;
                 }
@@ -112,22 +115,26 @@
             const registrationForm = document.getElementById('registration-form-element');
             if (registrationForm) {
                 registrationForm.addEventListener('submit', (event) => {
+                    // Ngăn form gửi đi ngay lập tức để kiểm tra
                     event.preventDefault();
+                    
                     const passwordInput = document.getElementById('register-password');
-                    const confirmPasswordInput = document.getElementById('confirm-password');
+                    // Sửa lại ID cho đúng với form Laravel
+                    const confirmPasswordInput = document.getElementById('password_confirmation'); 
                     const passwordError = document.getElementById('password-error');
 
-                    passwordError.textContent = '';
+                    // Reset lỗi
+                    if(passwordError) passwordError.textContent = '';
                     confirmPasswordInput.classList.remove('border-red-500');
 
                     if (passwordInput.value !== confirmPasswordInput.value) {
-                        passwordError.textContent = 'Mật khẩu không khớp. Vui lòng thử lại.';
+                        if(passwordError) passwordError.textContent = 'Mật khẩu không khớp. Vui lòng thử lại.';
                         confirmPasswordInput.classList.add('border-red-500');
                         confirmPasswordInput.focus();
                     } else {
-                        console.log('Đăng ký thành công! (Mật khẩu đã khớp)');
-                        alert('Đăng ký thành công!'); 
-                        showForm('login-form');
+                        // THAY ĐỔI: Mật khẩu đã khớp, cho phép form gửi đi để Laravel xử lý
+                        console.log('Mật khẩu đã khớp! Đang gửi form đến server...');
+                        registrationForm.submit();
                     }
                 });
             }
@@ -136,7 +143,13 @@
             window.addEventListener('resize', adjustContainerHeight);
 
             // --- KHỞI TẠO BAN ĐẦU ---
-            showForm('login-form');
+            // Xác định form nào đang hiển thị dựa trên URL hoặc logic khác nếu cần
+            // Ở đây, ta giả định nếu có form đăng ký thì hiển thị nó, nếu không thì là đăng nhập
+            if (document.getElementById('register-form')) {
+                showForm('register-form');
+            } else if (document.getElementById('login-form')) {
+                showForm('login-form');
+            }
         });
     </script>
 

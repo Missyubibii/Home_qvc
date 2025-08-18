@@ -13,12 +13,10 @@
 
             <!-- Nút mở menu mobile và Logo -->
             <div class="flex items-center gap-4">
-                <button id="open-menu-btn" class="lg:hidden text-gray-600 hover:text-primary-500">
-                    <svg class="w-6 h-6" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="bars"
-                        xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-                        <path fill="currentColor"
-                            d="M16 132h416c8.8 0 16-7.2 16-16V84c0-8.8-7.2-16-16-16H16C7.2 68 0 75.2 0 84v32c0 8.8 7.2 16 16 16zm416 56H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h416c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16zm0 128H16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h416c8.8 0 16-7.2 16-16v-32c0-8.8-7.2-16-16-16z">
-                        </path>
+                {{-- Nút này sẽ gửi một sự kiện để component mobile-menu (Alpine.js) bắt được và mở ra --}}
+                <button @click="$dispatch('open-mobile-menu')" class="lg:hidden text-gray-600 hover:text-primary-600 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
                 <a href="{{ route('home') }}" class="hidden lg:block flex-shrink-0">

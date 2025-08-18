@@ -4,12 +4,7 @@
 
 @section('content')
     <div class="flex justify-between items-center mb-6">
-        <h1 class="text-2xl font-bold text-gray-800">Dashboard</h1>
-        <button id="get-insights-btn"
-            class="bg-white border border-gray-300 text-gray-700 font-semibold px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-gray-50 transition-colors">
-            <span class="gemini-icon">✨</span>
-            <span class="button-text">Nhận định nhanh</span>
-        </button>
+        <h1 class="text-2xl font-bold text-gray-800">Trang chính</h1>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

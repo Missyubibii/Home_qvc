@@ -2,8 +2,9 @@
 
 namespace App\Providers;
 
+use Illuminate\Console\Application as Artisan;
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Support\Facades\Schema;
+
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -12,7 +13,29 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // GHI CHÚ: Điều kiện if ($this->app->isProduction()) đã được XÓA BỎ
+        // Logic này bây giờ sẽ chạy trên TẤT CẢ các môi trường
+
+        // Danh sách các lệnh nguy hiểm cần vô hiệu hóa
+        $commandsToDisable = [
+            'migrate:fresh',
+            'migrate:refresh',
+            'migrate:reset',
+            'migrate:rollback',
+            'db:seed',
+            'db:wipe',
+            'schema:dump',
+        ];
+
+        Artisan::starting(function ($artisan) use ($commandsToDisable) {
+            $commands = $artisan->all();
+
+            foreach ($commandsToDisable as $commandName) {
+                if (isset($commands[$commandName])) {
+                    $commands[$commandName]->setHidden(true);
+                }
+            }
+        });
     }
 
     /**
@@ -20,8 +43,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Schema::defaultStringLength(191);
+
     }
 }
-
-// php artisan migrate --path=/database/migrations/2025_08_15_071621_create_products_module_tables.php
